@@ -7,9 +7,9 @@ namespace TechnicalAssessment.Models
 {
     public class Book
     {
-        public int bID { get; set; }
+        public int ID { get; set; }
         public string bookName { get; set; }
         public string bookID { get; set; }
-        public bool reserved { get; set; }
+        public Boolean reserved { get; set; }
     }
 }

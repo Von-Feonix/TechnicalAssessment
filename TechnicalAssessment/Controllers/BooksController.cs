@@ -6,8 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows;
+using System.Windows.Forms;
 using TechnicalAssessment.DAL;
 using TechnicalAssessment.Models;
+using MessageBox = System.Windows.Forms.MessageBox;
+using MessageBoxOptions = System.Windows.Forms.MessageBoxOptions;
 
 namespace TechnicalAssessment.Controllers
 {
@@ -47,7 +51,7 @@ namespace TechnicalAssessment.Controllers
         // 更多详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,bookName,bookID")] Book book)
+        public ActionResult Create([Bind(Include = "ID,bookName,bookID,reserved")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -74,12 +78,11 @@ namespace TechnicalAssessment.Controllers
             return View(book);
         }
 
-        // POST: Books/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性；有关
-        // 更多详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,bookName,bookID")] Book book)
+        public ActionResult Edit([Bind(Include = "ID,bookName,bookID,reserved")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +92,9 @@ namespace TechnicalAssessment.Controllers
             }
             return View(book);
         }
+
+
+
 
         // GET: Books/Delete/5
         public ActionResult Delete(int? id)
@@ -105,6 +111,8 @@ namespace TechnicalAssessment.Controllers
             return View(book);
         }
 
+
+
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -116,6 +124,108 @@ namespace TechnicalAssessment.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Reserve(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Book book = db.Books.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            else if (book.reserved == true)
+            {
+                MessageBox.Show("This book has been reserved!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
+            else if (book.reserved == false)
+            {
+                book.reserved = true;
+                db.Entry(book).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reserve([Bind(Include = "ID,bookName,bookID,reserved")] Book book)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (book.reserved == true)
+                {
+                    MessageBox.Show("This book has been reserved!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                }
+                else if (book.reserved == false)
+                {
+                    book.reserved = true;
+                    db.Entry(book).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+            }
+            return View(book);
+        }
+        */
+
+        public ActionResult Return(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Book book = db.Books.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            else if (book.reserved == false)
+            {
+                MessageBox.Show("This book has been returned!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
+            else if (book.reserved == true)
+            {
+                book.reserved = false;
+                db.Entry(book).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Return([Bind(Include = "ID,bookName,bookID,reserved")] Book book)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (book.reserved == false)
+                {
+                    MessageBox.Show("This book has been returned!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+
+                }
+                else if (book.reserved == true)
+                {
+                    book.reserved = false;
+                    db.Entry(book).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+            }
+            return View(book);
+        }
+        */
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -124,5 +234,7 @@ namespace TechnicalAssessment.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }

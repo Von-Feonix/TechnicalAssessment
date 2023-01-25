@@ -26,9 +26,16 @@
             @Html.DisplayFor(model => model.bookID)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.reserved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reserved)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

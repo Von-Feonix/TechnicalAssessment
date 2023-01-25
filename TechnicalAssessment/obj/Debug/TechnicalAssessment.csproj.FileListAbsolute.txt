@@ -87,3 +87,4 @@ C:\Users\Administrator\source\repos\TechnicalAssessment\TechnicalAssessment\bin\
 C:\Users\Administrator\source\repos\TechnicalAssessment\TechnicalAssessment\obj\Debug\TechnicalAssessment.csproj.CopyComplete
 C:\Users\Administrator\source\repos\TechnicalAssessment\TechnicalAssessment\obj\Debug\TechnicalAssessment.dll
 C:\Users\Administrator\source\repos\TechnicalAssessment\TechnicalAssessment\obj\Debug\TechnicalAssessment.pdb
+C:\Users\Administrator\source\repos\TechnicalAssessment\TechnicalAssessment\obj\Debug\TechnicalAssessment.csproj.AssemblyReference.cache

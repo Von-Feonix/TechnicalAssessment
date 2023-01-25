@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TechnicalAssessment.Models.Book>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "BookList";
 }
 
 <h2>Index</h2>
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.bID)
+            @Html.DisplayNameFor(model => model.ID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.bookName)
@@ -27,19 +27,27 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.bookName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.bookID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.bID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.bID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.bID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.bookName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.bookID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.reserved)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+        @Html.ActionLink("Reserve", "Reserve", new { id = item.ID }) |
+        @Html.ActionLink("Return", "Return", new { id = item.ID })
+    </td>
+</tr>
 }
 
 </table>
