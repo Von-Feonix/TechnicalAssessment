@@ -143,7 +143,12 @@ namespace TechnicalAssessment.Controllers
             {
                 book.reserved = true;
                 db.Entry(book).State = EntityState.Modified;
+                Reservation reservation = new Reservation();
+                reservation.Book = book;
+                reservation.reservationTime = DateTime.Now.ToString();
+                db.Reservations.Add(reservation);
                 db.SaveChanges();
+                MessageBox.Show("Reservation successful!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 return RedirectToAction("Index");
             }
 
@@ -193,7 +198,9 @@ namespace TechnicalAssessment.Controllers
             {
                 book.reserved = false;
                 db.Entry(book).State = EntityState.Modified;
+
                 db.SaveChanges();
+                MessageBox.Show("Return successful!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 return RedirectToAction("Index");
             }
 

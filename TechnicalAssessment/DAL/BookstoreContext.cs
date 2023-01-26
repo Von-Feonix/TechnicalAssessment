@@ -19,5 +19,7 @@ namespace TechnicalAssessment.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<TechnicalAssessment.Models.Reservation> Reservations { get; set; }
     }
 }

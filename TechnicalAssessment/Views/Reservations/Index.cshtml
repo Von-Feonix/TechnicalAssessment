@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TechnicalAssessment.Models.Reservation>
+
+@{
+    ViewBag.Title = "Reservations";
+}
+
+<h2>Reservations</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReservationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.bookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reservationTime)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReservationID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Book.bookName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.reservationTime)
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ReservationID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })
+    </td>
+</tr>
+}
+
+</table>
