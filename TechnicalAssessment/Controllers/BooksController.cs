@@ -20,9 +20,14 @@ namespace TechnicalAssessment.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Books
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Books.ToList());
+            var books = from b in db.Books select b;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => s.bookName.Contains(searchString));
+            }
+            return View(books);
         }
 
         // GET: Books/Details/5
