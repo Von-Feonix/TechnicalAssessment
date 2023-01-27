@@ -7,11 +7,11 @@
 <h2>Book List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a new book", "Create")
     @using (Html.BeginForm())
     {
 <p>
-    Search: @Html.TextBox("SearchString")   
+    Book Search: @Html.TextBox("SearchString")   
     <input type="submit" value="Search" />
 </p>
 
@@ -32,7 +32,8 @@
             <th>
                 Reservation Status
             </th>
-            <th></th>
+
+            <th>Actions</th>
         </tr>
 
         @foreach (var item in Model)
@@ -51,9 +52,6 @@
                     @Html.DisplayFor(modelItem => item.reserved)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
                     @Html.ActionLink("Reserve", "Reserve", new { id = item.ID }) |
                     @Html.ActionLink("Return", "Return", new { id = item.ID })
                 </td>

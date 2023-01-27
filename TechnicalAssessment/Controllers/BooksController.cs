@@ -153,7 +153,9 @@ namespace TechnicalAssessment.Controllers
                 reservation.reservationTime = DateTime.Now.ToString();
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-                MessageBox.Show("Reservation successful!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                string bookingNumber = "\n Your booking number is: " + db.Reservations.Count().ToString();
+                
+                MessageBox.Show("Reservation successful!"+bookingNumber, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 return RedirectToAction("Index");
             }
 

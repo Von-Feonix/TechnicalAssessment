@@ -6,13 +6,11 @@
 
 <h2>Reservations</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            Reservation ID
+            Booking number
         </th>
         <th>
             Book Name
@@ -21,7 +19,7 @@
             Reservation Time
         </th>
 
-        <th></th>
+        <th>Action</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -37,8 +35,6 @@
     </td>
 
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ReservationID }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })
     </td>
 </tr>
